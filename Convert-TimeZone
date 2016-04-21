@@ -3,7 +3,9 @@ Function Convert-TimeZone
     [CmdletBinding()]            
     Param(  [Parameter(Mandatory=$true)]            
             [ValidateNotNullOrEmpty()]            
-            [DateTime]$DateTime,            
+            [DateTime]$DateTime,
+            [parameter( Mandatory=$true)]            
+            [ValidateNotNullOrEmpty()]   
             [String]$ToTimeZone  = ([System.TimeZoneInfo]::UTC).id            
     )            
 
