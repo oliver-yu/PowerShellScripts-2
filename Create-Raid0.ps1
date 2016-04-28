@@ -10,9 +10,9 @@ Function Create-Raid0
 
         .DESCRIPTION
 
-        This function selectes all available disk an creates a raid 0 disk array out of them.
+        This function selects all available disk and creates a raid 0 disk array out of them.
         At least two hard disks are neccessary to create a raid 0 disk array.
-        The disk array is formated with NTFS and adrive letter is automatically assigned.
+        The disk array is formated with NTFS and a drive letter is automatically assigned.
 
 
         .EXAMPLE 
