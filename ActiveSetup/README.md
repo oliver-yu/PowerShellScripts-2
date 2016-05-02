@@ -20,6 +20,8 @@
     
   ActiveSetup-LocalMachine - GUID $GUID -Vendor "Microsoft" -ProductName ".Net Framework" -Version "x.x.xxxx" -Folder "ActiveSetupFolder" -Method "uninstall"   
 
-### Links 
+### Links
+
   https://blogs.msdn.microsoft.com/aruns_blog/2011/06/20/active-setup-registry-key-what-it-is-and-how-to-create-in-the-package-using-admin-studio-install-shield/
+  
   https://gallery.technet.microsoft.com/PS2EXE-Convert-PowerShell-9e4e07f1  
