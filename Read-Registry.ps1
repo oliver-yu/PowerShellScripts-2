@@ -1,5 +1,5 @@
-Function Read-Registry {
-
+Function Read-Registry 
+{
     <#
 
     .SYNOPSIS
