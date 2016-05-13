@@ -10,7 +10,7 @@ Function Convert-ToBoolean
 
     .DESCRIPTION
 
-    The function converts multiple string expressions into a boolean. Even &null Values are handeld.
+    The function converts multiple string expressions into a boolean. Even $null values are handled.
 
 
 
