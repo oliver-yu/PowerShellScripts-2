@@ -70,39 +70,30 @@ Function Get-LoggedOnUsersSID
     
     #>
     
-
     $regexDomain = '.+Domain="(.+)",Name="(.+)"$'
-    $regexLogin = '.+LogonId="(\d+)"$'
-    $logonSessions = @(Get-WmiObject Win32_LogonSession | Where-Object -FilterScript { $_.LogonType -eq '2' -or $_.LogonType -eq '10' })
-    $logonUsers = @(Get-WmiObject Win32_LoggedOnUser)
-    $sessionUser = @{}
-    $arrNames = @()
+    $userNames = @()
 
-    $logonUsers | % {
-        $_.antecedent -match $regexDomain > $nul
-        $username = $matches[1] + "\" + $matches[2]
-        $_.dependent -match $regexLogin > $nul
-        $session = $matches[1]
-        $sessionUser[$session] += $username  
-    }
+    Foreach ($id in @((Get-WmiObject -Class Win32_LogonSession -ComputerName "." | Where-Object { $_.LogonType -eq 2 -or $_.LogonType -eq 10 }).LogonId) ) 
+    {  
+        $UserInfo = (Get-WmiObject Win32_LoggedOnUser | Where-Object { $_.Dependent -like "*$($id)*"  }).Antecedent
 
-    $logonSessions | % {
-        $name = $sessionUser[$_.logonid]
+        $UserInfo -match $regexDomain > $nul
+        $UserName = $matches[1] + "\" + $matches[2]
         
-        if ($arrNames -notcontains $name) 
+        $User = New-Object System.Security.Principal.NTAccount($UserName)
+    
+        if ($userNames -contains $User)
         {
-            $arrNames += $name
-            $SID = Get-WmiObject Win32_UserAccount | Where-Object -FilterScript { $_.Caption -eq $name }
-            
-            if ($SID) 
-            {
-                $loggedOnUser = New-Object -TypeName PsObject
-                $loggedOnUser | Add-Member -MemberType NoteProperty -Name "UserName" -Value $sessionUser[$_.logonid]
-                $loggedOnUser | Add-Member -MemberType NoteProperty -Name "SID" -Value $(Normalize-SID -SID $SID.SID) 
-                $loggedOnUser
-            }
+            continue
         }
+        else
+        {
+            $userNames += $User
+        }
+    
+        $loggedOnUser = New-Object -TypeName PsObject
+        $loggedOnUser | Add-Member -MemberType NoteProperty -Name "UserName" -Value $User
+        $loggedOnUser | Add-Member -MemberType NoteProperty -Name "SID" -Value (Normalize-SID -SID $User.Translate([System.Security.Principal.SecurityIdentifier]).value)
+        $loggedOnUser
     }
 }
-
-Get-LoggedOnUsersSID
