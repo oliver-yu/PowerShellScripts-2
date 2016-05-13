@@ -139,7 +139,7 @@ Function Read-Registry
         {
             return $RegObj.uValue
         }
-        elseif ($RegKeyType -eq "REG_SZ" -or $RegKeyType -eq "REG_EXPAND_SZ" -or "REG_MULTI_SZ")
+        elseif ($RegKeyType -eq "REG_SZ" -or $RegKeyType -eq "REG_EXPAND_SZ" -or $RegKeyType -eq "REG_MULTI_SZ")
         {
             return $RegObj.sValue
         }
