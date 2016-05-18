@@ -64,6 +64,6 @@ Function Execute-SqlQuery
         Write-Host $_.Exception.ToString() -ForegroundColor Red
         $Reader.Close()
         $Reader.Dispose()
-        return null
+        return $null
     }    
 }
