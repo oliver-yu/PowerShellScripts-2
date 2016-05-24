@@ -1,8 +1,44 @@
 Function Send-WakeOnLan
 { 
+    <#
+
+        .SYNOPSIS
+
+        Send wake on lan request.
+
+
+
+        .DESCRIPTION
+
+        This function sends a wake on lan request to a given mac address.
+
+
+
+        .PARAMETER MAC
+
+        Mac address to send the package to.
+
+
+        .PARAMETER Subnetmask (optional)
+
+        Subnetmask of the client.
+
+
+        .PARAMETER Port (optional)
+
+        Port to send the package to. Default is 9.
+
+
+
+        .EXAMPLE 
+
+        Send-WakeOnLan -MAC 32:00:6A:5D:3B:1C
+
+    #>
+
     [CmdletBinding()] 
     Param( 
-        [Parameter(Mandatory=$True,Position=1)] 
+        [Parameter(Mandatory=$True)] 
         [string]$MAC, 
         [string]$Subnetmask = "255.255.255.255",  
         [int]$Port = 9 
