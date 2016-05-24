@@ -1,5 +1,31 @@
 Function Get-RedirectedUrl 
-{
+{ 
+    <#
+
+        .SYNOPSIS
+
+        Get redirected url..
+
+
+
+        .DESCRIPTION
+
+        This function gets the redirected url of a link.
+
+
+
+        .PARAMETER URL
+
+        Url to get the redirected url from.
+
+
+
+        .EXAMPLE 
+
+        Get-RedirectedUrl -URL "https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409"
+
+    #>
+
     Param (
         [Parameter(Mandatory=$true)]
         [String]$URL
