@@ -25,7 +25,8 @@ function Get-RandomPassword {
         $Length
         )
 
-    if ($Length -lt 6) {$Length = 6}
+    $minPasswordLength = 6
+    if ($Length -lt $minPasswordLength) {$Length = $minPasswordLength}
 
     $numberCount = [Math]::Round($Length / 4)
     $signCount = [Math]::Round($Length / 5)
