@@ -1,23 +1,24 @@
-<#
-.SYNOPSIS
-    Generates a random password with variable length.
-
-.DESCRIPTION
-    Generates a random password with a length of six characters at least. Every password will 
-    contain numbers, special signs and one or more lower and upper case letters.
-
-.PARAMETER Length
-    Length of the password. Minimum length is 6. Any length value smaller than 6 will return a 
-    six character password.
-
-.EXAMPLE
-    Get-RandomPassword(9)
-    Get-RandomPassword -Length 12 
-
-.NOTES
-
-#>
 function Get-RandomPassword {
+    <#
+    .SYNOPSIS
+        Generates a random password with variable length.
+
+    .DESCRIPTION
+        Generates a random password with a length of six characters at least. Every password will 
+        contain numbers, special signs and one or more lower and upper case letters.
+
+    .PARAMETER Length
+        Length of the password. Minimum length is 6. Any length value smaller than 6 will return a 
+        six character password.
+
+    .EXAMPLE
+        Get-RandomPassword(9)
+        Get-RandomPassword -Length 12 
+
+    .NOTES
+
+    #>
+    
     Param(
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
