@@ -1,15 +1,14 @@
-# SQL Server unattended installation 
+# SQL Server unattended installation
 
 This PowerShell script provides an unattended installation of almost any SQL Server edition. See description below for information how to use it and customize it to your needs.
 
 To fully automate the SQL Server installation you need three things:
 
- - An SQL Server installation ISO-file
- - A configuration file (INI-file)
- - This short PowerShell script
+- An SQL Server installation ISO-file
+- A configuration file (INI-file)
+- This short PowerShell script
 
-
-##### Getting the resources for the SQL Server unattended installation
+## Getting the resources for the SQL Server unattended installation
 
 The ISO-file can be obtained from Microsoft . In this toturial I use the developer edition of SQL Server 2014, which I downloaded from the [MSDN](https://msdn.microsoft.com). You can use any edition of SQL Server, except the SQL Server Express Editions.
 
@@ -28,7 +27,6 @@ Copy the path and open it in file explorer.
 Copy the file into a directory of your choise. It is a good advice to copy your ISO-file, your configuration file and the powershell script into the same directory. Afterwards cancel the installation.
 
 Below you see the configuration file of my installation. The content of your configuration file may differ a little depending on the features and SQL Server version you choose for your SQL Server unattended installation, but it should look similar to the following one.
-
 
 ```ini
 ;SQL Server 2014 Configuration File
@@ -99,9 +97,7 @@ Make sure that "IACCEPTSQLSERVERLICENSETERMS" (line 5) and "QUIET" (line 8) are 
 
 Depending on the features you selected you may have to add the wildcard at more than these two positions. Replace every occurring of your current user acount in the configuration file with this wildcard.
 
-
-
-##### Creating the script for the SQL Server unattended installation
+## Creating the script for the SQL Server unattended installation
 
 All preparation is done now and we can take a look at the PowerShell script I created, to do all the magic we need for our SQL Server unattended installation.
 
@@ -146,7 +142,5 @@ Afterwards the name of the currently logged in user is set to a variable. Next t
 
 At line 15 the configuration file is parsed and the previously inserted "<CURRENTUSER>" wildcard is replaced with the name of the user running the script. So the user running the SQL Server unattended installation will be the administrator of the newly created SQL Server. Otherwise you would not have access to the SQL Server.
 In the following lines the ISO-file is mounted and the installation is started. At the end the image is dismounted and the configuration file is reparsed and the changes are reverted. This is not really neccessary, I only added this part to make the file reusable.
-
-
 
 And that's all. The script is ready to run the installation without any user input. As long as you have the appropriate configurtaion file, you can run  the installation of  any SQL Server version with this script.
