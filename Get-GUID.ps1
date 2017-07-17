@@ -7,7 +7,7 @@ function Get-Guid
         .DESCRIPTION
             Generates a new 32 Bit GUID.
 
-        .PARAMETER AddPraces
+        .PARAMETER AddBraces
             Adds braces surrounding the GUID.
 
         .PARAMETER RemoveHyphen
