@@ -1,4 +1,4 @@
-function Get-Guid
+function Get-GUID
 {
     <#
         .SYNOPSIS
@@ -23,8 +23,8 @@ function Get-Guid
     #>
 
     Param([switch]$AddBraces,
-    [switch]$RemoveHyphens,
-    [switch]$Uppercase
+        [switch]$RemoveHyphens,
+        [switch]$Uppercase
     )
 
     $guid = (New-Guid).Guid
@@ -47,4 +47,4 @@ function Get-Guid
     $guid
 }
 
-Get-Guid
+Get-GUID
