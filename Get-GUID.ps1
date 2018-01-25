@@ -5,7 +5,7 @@ function Get-GUID
             Generates a new GUID.
 
         .DESCRIPTION
-            Generates a new 32 Bit GUID.
+            Generates a new 128 Bit GUID.
 
         .PARAMETER AddBraces
             Adds braces surrounding the GUID.
@@ -14,37 +14,48 @@ function Get-GUID
             Removes the hyphens.
 
         .PARAMETER Uppercase
-            Returns only upper case letters.
+            Returns GUID with all upper case letters.
+
+        .PARAMETER Amount
+            Number of guids to create. If not set a single GUID is created.
 
         .EXAMPLE 
             Get-GUID
             Get-GUID -AddBraces -Uppercase
-
     #>
 
     Param([switch]$AddBraces,
-        [switch]$RemoveHyphens,
-        [switch]$Uppercase
+          [switch]$RemoveHyphens,
+          [switch]$Uppercase,
+          [int]$Amount
     )
 
-    $guid = (New-Guid).Guid
-
-    if ($Uppercase)
+    if (!$Amount -or $Amount -le 1) 
     {
-        $guid = $guid.ToUpper()
+        $Amount = 1
     }
 
-    if ($AddBraces)
+    foreach ($i in 1..$Amount) 
     {
-        $guid = '{' + $guid + '}'
-    }
+        $guid = (New-Guid).Guid
 
-    if ($RemoveHyphens)
-    {
-        $guid = $guid.Replace('-', '')
-    }
+        if ($Uppercase) 
+        {
+            $guid = $guid.ToUpper()
+        }
 
-    $guid
+        if ($AddBraces) 
+        {
+            $guid = '{' + $guid + '}'
+        }
+
+        if ($RemoveHyphens) 
+        {
+            $guid = $guid.Replace('-', '')
+        }
+
+        $guid
+    }
 }
 
 Get-GUID
